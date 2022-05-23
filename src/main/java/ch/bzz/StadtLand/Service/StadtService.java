@@ -14,9 +14,14 @@ import java.util.List;
  * Services for reading, adding, changing and deleting books
  *
  */
-@Path("Stadt")
+@Path("stadt")
 public class StadtService {
 
+    /**
+     *
+     * reads a list of staedte
+     * @return staedte as JSON
+     */
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
