@@ -1,5 +1,4 @@
 package ch.bzz.StadtLand.Service;
-
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.io.FileInputStream;
@@ -27,7 +26,6 @@ public class Config extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         HashSet providers = new HashSet<Class<?>>();
-        //providers.add(BookService.class);
         providers.add(TestService.class);
         providers.add(StadtService.class);
         providers.add(LandService.class);
