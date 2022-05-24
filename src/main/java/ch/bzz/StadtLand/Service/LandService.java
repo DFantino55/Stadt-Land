@@ -1,5 +1,4 @@
 package ch.bzz.StadtLand.Service;
-
 import ch.bzz.StadtLand.Model.Land;
 import ch.bzz.StadtLand.Data.DataHandler;
 import javax.ws.rs.GET;
