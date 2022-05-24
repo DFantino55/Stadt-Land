@@ -1,6 +1,6 @@
 package ch.bzz.StadtLand.Service;
 
-import ch.bzz.StadtLand.Model.Stadt;
+import ch.bzz.StadtLand.Model.Land;
 import ch.bzz.StadtLand.Data.DataHandler;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,44 +12,45 @@ import java.util.List;
 
 /**
  *
- * Services for reading, adding, changing and deleting staedte
+ * Services for reading, adding, changing and deleting Laender
  *
  */
-@Path("stadt")
-public class StadtService {
+@Path("land")
+public class LandService {
 
     /**
      *
-     * reads a list of staedte
-     * @return staedte as JSON
+     * reads a list of laender
+     * @return laender as JSON
      */
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listStaedte() {
-        List<Stadt> stadtList = DataHandler.getInstance().readAllStaedte();
+    public Response listLaender() {
+        List<Land> landList = DataHandler.getInstance().readAllLaender();
         return Response
                 .status(200)
-                .entity(stadtList)
+                .entity(landList)
                 .build();
     }
 
 
     /**
      *
-     * reads a stadt by uuid
-     * @return stadt as JSON
+     * reads a land by laendercode
+     * @return land as JSON
      */
     @GET
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response readStadt(
-            @QueryParam("uuid") String stadtUUID
+    public Response readLand(
+            @QueryParam("laendercode") String laenderCode
     ) {
-        Stadt stadt = DataHandler.getInstance().readStadtByUUID(stadtUUID);
+        Land land = DataHandler.getInstance().readLandByLaendercode(laenderCode);
         return Response
                 .status(200)
-                .entity(stadt)
+                .entity(land)
                 .build();
     }
 }
+

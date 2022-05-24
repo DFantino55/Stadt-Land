@@ -26,8 +26,8 @@ public class DataHandler {
     private DataHandler() {
         setStadtList(new ArrayList<>());
         //readPublisherJSON();
-        readLandJSON();
         setLandList(new ArrayList<>());
+        readLandJSON();
         //readBookJSON();
         readStadtJSON();
     }
