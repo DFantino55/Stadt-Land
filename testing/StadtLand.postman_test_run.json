@@ -1,0 +1,172 @@
+{
+	"id": "4d71ad4f-2144-4081-ba5e-e886e3d53487",
+	"name": "StadtLand",
+	"timestamp": "2022-05-24T21:19:42.134Z",
+	"collection_id": "0b4374e6-2490-4c06-8899-1f24d5aa42f3",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "524e3f17-de17-4662-9629-bf04ad2119d5",
+			"name": "0.1 Testservice",
+			"url": "http://localhost:8080/Stadt-Land-1.0/resource/test/test",
+			"time": 88,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				88
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "4c9e5858-a6c2-4b7c-b3ba-52d6a5d9b078",
+			"name": "1.0 list all staedte",
+			"url": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/list",
+			"time": 35,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				35
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5ad7ea5f-59ae-4bea-b4b1-f862260d95fc",
+			"name": "1.1 read stadt by uuid",
+			"url": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/read?uuid=11111",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ab8f5476-8ea0-43f0-81ee-00cb20a0a07f",
+			"name": "1.2 read stadt by uuid not found",
+			"url": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/read?uuid=12345815504754574584795837594857938",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				20
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "bcefc800-d2e0-4f31-be97-101b24c8684d",
+			"name": "2.1 list all laender",
+			"url": "http://localhost:8080/Stadt-Land-1.0/resource/land/list",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				13
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "85e48814-fd8a-4326-879a-33f4a02d6eec",
+			"name": "2.2 read land by laendercode",
+			"url": "http://localhost:8080/Stadt-Land-1.0/resource/land/read?laendercode=ch-che-756",
+			"time": 40,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				40
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1373397e-9961-4a41-a2c2-1d3a928ce4e6",
+			"name": "2.3 read land by laendercode not found",
+			"url": "http://localhost:8080/Stadt-Land-1.0/resource/land/read?laendercode=ch-che-123456789987654321",
+			"time": 82,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				82
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 285,
+	"collection": {
+		"requests": [
+			{
+				"id": "524e3f17-de17-4662-9629-bf04ad2119d5",
+				"method": "GET"
+			},
+			{
+				"id": "4c9e5858-a6c2-4b7c-b3ba-52d6a5d9b078",
+				"method": "GET"
+			},
+			{
+				"id": "5ad7ea5f-59ae-4bea-b4b1-f862260d95fc",
+				"method": "GET"
+			},
+			{
+				"id": "ab8f5476-8ea0-43f0-81ee-00cb20a0a07f",
+				"method": "GET"
+			},
+			{
+				"id": "bcefc800-d2e0-4f31-be97-101b24c8684d",
+				"method": "GET"
+			},
+			{
+				"id": "85e48814-fd8a-4326-879a-33f4a02d6eec",
+				"method": "GET"
+			},
+			{
+				"id": "1373397e-9961-4a41-a2c2-1d3a928ce4e6",
+				"method": "GET"
+			}
+		]
+	}
+}
