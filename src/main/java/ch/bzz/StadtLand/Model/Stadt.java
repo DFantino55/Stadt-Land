@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Stadt {
     private String uuid;
     private String bezeichnung;
-    @JsonIgnore
     private Land land;
     private Integer bevoelkerung;
     private Double flaeche;
