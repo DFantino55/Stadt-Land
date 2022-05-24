@@ -1,11 +1,8 @@
 package ch.bzz.StadtLand.Data;
-
 import ch.bzz.StadtLand.Model.Stadt;
 import ch.bzz.StadtLand.Model.Land;
 import ch.bzz.StadtLand.Service.Config;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,16 +22,14 @@ public class DataHandler {
      */
     private DataHandler() {
         setStadtList(new ArrayList<>());
-        //readPublisherJSON();
         setLandList(new ArrayList<>());
         readLandJSON();
-        //readBookJSON();
         readStadtJSON();
     }
 
     /**
      * gets the only instance of this class
-     * @return
+     * @return instance
      */
     public static DataHandler getInstance() {
         if (instance == null)
@@ -42,19 +37,18 @@ public class DataHandler {
         return instance;
     }
 
-
     /**
-     * reads all books
-     * @return list of books
+     * reads all staedte
+     * @return list of staedte
      */
     public List<Stadt> readAllStaedte() {
         return getStadtList();
     }
 
     /**
-     * reads a book by its uuid
-     * @param stadtUUID
-     * @return the Book (null=not found)
+     * reads a stadt by its uuid
+     * @param stadtUUID uuid of stadt
+     * @return stadt (null=not found)
      */
     public Stadt readStadtByUUID(String stadtUUID) {
         Stadt stadt = null;
@@ -67,18 +61,17 @@ public class DataHandler {
     }
 
     /**
-     * reads all Publishers
-     * @return list of publishers
+     * reads all laender
+     * @return list of laender
      */
     public List<Land> readAllLaender() {
-
         return getLandList();
     }
 
     /**
-     * reads a publisher by its uuid
-     * @param laendercode
-     * @return the Publisher (null=not found)
+     * reads a land by its laendercode
+     * @param laendercode specific code for each land
+     * @return the land (null=not found)
      */
     public Land readLandByLaendercode(String laendercode) {
         Land land = null;
@@ -91,7 +84,7 @@ public class DataHandler {
     }
 
     /**
-     * reads the books from the JSON-file
+     * reads the stadt from the JSON-file
      */
     private void readStadtJSON() {
         try {
@@ -110,7 +103,7 @@ public class DataHandler {
     }
 
     /**
-     * reads the publishers from the JSON-file
+     * reads the land from the JSON-file
      */
     private void readLandJSON() {
         try {
@@ -129,7 +122,7 @@ public class DataHandler {
         }
     }
 
-    //Done
+    //* Getter and Setter
 
     /**
      * gets stadtList
