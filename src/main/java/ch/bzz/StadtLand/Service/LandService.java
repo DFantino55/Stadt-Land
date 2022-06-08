@@ -26,7 +26,7 @@ public class LandService {
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listLaender() {
-        List<Land> landList = DataHandler.getInstance().readAllLaender();
+        List<Land> landList = DataHandler.readAllLaender();
         return Response
                 .status(200)
                 .entity(landList)
@@ -45,7 +45,7 @@ public class LandService {
     public Response readLand(
             @QueryParam("laendercode") String laenderCode
     ) {
-        Land land = DataHandler.getInstance().readLandByLaendercode(laenderCode);
+        Land land = DataHandler.readLandByLaendercode(laenderCode);
         return Response
                 .status(200)
                 .entity(land)

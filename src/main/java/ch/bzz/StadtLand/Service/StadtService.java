@@ -26,7 +26,7 @@ public class StadtService {
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listStaedte() {
-        List<Stadt> stadtList = DataHandler.getInstance().readAllStaedte();
+        List<Stadt> stadtList = DataHandler.readAllStaedte();
         return Response
                 .status(200)
                 .entity(stadtList)
@@ -45,7 +45,7 @@ public class StadtService {
     public Response readStadt(
             @QueryParam("uuid") String stadtUUID
     ) {
-        Stadt stadt = DataHandler.getInstance().readStadtByUUID(stadtUUID);
+        Stadt stadt = DataHandler.readStadtByUUID(stadtUUID);
         return Response
                 .status(200)
                 .entity(stadt)

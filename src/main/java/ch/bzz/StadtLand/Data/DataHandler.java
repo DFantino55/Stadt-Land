@@ -13,35 +13,21 @@ import java.util.List;
  * reads and writes the data in the JSON-files
  */
 public class DataHandler {
-    private static DataHandler instance = null;
-    private List<Stadt> stadtList;
-    private List<Land> landList;
+    private static List<Stadt> stadtList;
+    private static List<Land> landList;
 
     /**
      * private constructor defeats instantiation
      */
     private DataHandler() {
-        setStadtList(new ArrayList<>());
-        setLandList(new ArrayList<>());
-        readLandJSON();
-        readStadtJSON();
     }
 
-    /**
-     * gets the only instance of this class
-     * @return instance
-     */
-    public static DataHandler getInstance() {
-        if (instance == null)
-            instance = new DataHandler();
-        return instance;
-    }
 
     /**
      * reads all staedte
      * @return list of staedte
      */
-    public List<Stadt> readAllStaedte() {
+    public static List<Stadt> readAllStaedte() {
         return getStadtList();
     }
 
@@ -50,7 +36,7 @@ public class DataHandler {
      * @param stadtUUID uuid of stadt
      * @return stadt (null=not found)
      */
-    public Stadt readStadtByUUID(String stadtUUID) {
+    public static Stadt readStadtByUUID(String stadtUUID) {
         Stadt stadt = null;
         for (Stadt entry : getStadtList()) {
             if (entry.getUuid().equals(stadtUUID)) {
@@ -64,7 +50,7 @@ public class DataHandler {
      * reads all laender
      * @return list of laender
      */
-    public List<Land> readAllLaender() {
+    public static List<Land> readAllLaender() {
         return getLandList();
     }
 
@@ -73,7 +59,7 @@ public class DataHandler {
      * @param laendercode specific code for each land
      * @return the land (null=not found)
      */
-    public Land readLandByLaendercode(String laendercode) {
+    public static Land readLandByLaendercode(String laendercode) {
         Land land = null;
         for (Land entry : getLandList()) {
             if (entry.getLaenderCode().equals(laendercode)) {
@@ -86,7 +72,7 @@ public class DataHandler {
     /**
      * reads the stadt from the JSON-file
      */
-    private void readStadtJSON() {
+    private static void readStadtJSON() {
         try {
             String path = Config.getProperty("stadtJSON");
             byte[] jsonData = Files.readAllBytes(
@@ -105,7 +91,7 @@ public class DataHandler {
     /**
      * reads the land from the JSON-file
      */
-    private void readLandJSON() {
+    private static void readLandJSON() {
         try {
             byte[] jsonData = Files.readAllBytes(
                     Paths.get(
@@ -130,26 +116,38 @@ public class DataHandler {
      * @return value of stadtList
      */
 
-    private List<Stadt> getStadtList() { return stadtList; }
+    private static List<Stadt> getStadtList() {
+        if (stadtList == null) {
+            setStadtList(new ArrayList<>());
+            readLandJSON();
+        }
+        return stadtList;
+    }
 
     /**
      * sets stadtList
      *
      * @param stadtList the value to set
      */
-    private void setStadtList(List<Stadt> stadtList) { this.stadtList = stadtList; }
+    private static void setStadtList(List<Stadt> stadtList) { DataHandler.stadtList = stadtList; }
 
     /**
      * gets landList
      *
      * @return value of landList
      */
-    private List<Land> getLandList() { return landList; }
+    private static List<Land> getLandList() {
+        if (landList == null) {
+            setLandList(new ArrayList<>());
+            readStadtJSON();
+        }
+        return landList;
+    }
 
     /**
      * sets landList
      *
      * @param landList the value to set
      */
-    private void setLandList(List<Land> landList) {this.landList = landList; }
+    private static void setLandList(List<Land> landList) {DataHandler.landList = landList; }
 }
