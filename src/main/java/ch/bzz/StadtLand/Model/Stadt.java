@@ -1,19 +1,63 @@
 package ch.bzz.StadtLand.Model;
-import ch.bzz.StadtLand.Model.Land;
+import ch.bzz.StadtLand.Data.DataHandler;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.*;
+
+//import javax.validation.constraints.Size;
+import javax.ws.rs.FormParam;
 
 
 /**
  * a city (stadt) in a country (land)
  */
 public class Stadt {
-    private String uuid;
-    private String bezeichnung;
+    @JsonIgnore
     private Land land;
+
+    @FormParam("uuid")
+    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
+    @NotEmpty
+    private String uuid;
+
+    @FormParam("bezeichnung")
+    @NotEmpty
+    @Size(min=3, max=30)
+    private String bezeichnung;
+
+    @FormParam("bevoelkerung")
+    @Min(1)
+    @NotNull
     private Integer bevoelkerung;
+
+    @FormParam("flaeche")
+    @Min(1)
+    @NotNull
     private Double flaeche;
 
     //* Getter and Setter
+
+    //test
+    public String getLaendercode() {
+        if (getLand()== null) return null;
+        return getLand().getLaenderCode();
+    }
+
+    public void setLandByLaendercode(String laendercode) {
+        setLand(new Land());
+        Land land = DataHandler.readLandByLaendercode(laendercode);
+        //setLand(land);
+        getLand().setLaenderCode(laendercode);
+        //getLand().setBezeichnung(land.getBezeichnung());
+        /* if (land != null) {
+            getLand().setBezeichnung(land.getBezeichnung());
+            getLand().setGruendungsJahr(land.getGruendungsJahr());
+            getLand().setBevoelkerung(land.getBevoelkerung());
+            getLand().setFlaeche(land.getFlaeche());
+        }
+         */
+    }
 
     /**
      * gets UUID

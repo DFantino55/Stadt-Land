@@ -78,7 +78,7 @@ public class Land {
      * @param gruendungsjahr the value to set
      */
 
-    public void setGruendungsdatum(Integer gruendungsjahr) {
+    public void setGruendungsJahr(Integer gruendungsjahr) {
         this.gruendungsJahr = gruendungsjahr;
     }
 

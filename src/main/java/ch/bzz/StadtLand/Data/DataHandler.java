@@ -2,8 +2,12 @@ package ch.bzz.StadtLand.Data;
 import ch.bzz.StadtLand.Model.Stadt;
 import ch.bzz.StadtLand.Model.Land;
 import ch.bzz.StadtLand.Service.Config;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -20,6 +24,12 @@ public class DataHandler {
      * private constructor defeats instantiation
      */
     private DataHandler() {
+    }
+
+    //Potenzielle Fehlerquelle
+    public static void initLists() {
+        DataHandler.setStadtList(null);
+        DataHandler.setLandList(null);
     }
 
 
@@ -108,6 +118,83 @@ public class DataHandler {
         }
     }
 
+    /**
+     * inserts a new stadt into the stadtlist
+     *
+     * @param stadt eine stadt
+     */
+    public static void insertStadt(Stadt stadt) {
+        getStadtList().add(stadt);
+        writeStadtJSON();
+    }
+
+    /**
+     * updates the stadtlist
+     */
+    public static void updateStadt() {
+        writeStadtJSON();
+    }
+
+    /**
+     * deletes a stadt by the stadtUuid
+     * @param stadtUuid uuid of stadt
+     * @return success=true/false
+     */
+    public static boolean deleteStadt(String stadtUuid) {
+        Stadt stadt = readStadtByUUID(stadtUuid);
+        if (stadt != null) {
+           getStadtList().remove(stadt);
+           writeStadtJSON();
+           return true;
+        } else {
+            return false;
+        }
+    }
+
+    //* Writer
+
+    /**
+     * writes the stadtList to the JSON-file
+     */
+    private static void writeStadtJSON() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
+        FileOutputStream fileOutputStream = null;
+        Writer fileWriter;
+
+
+
+        String stadtPath = Config.getProperty("stadtJSON");
+        try {
+            fileOutputStream = new FileOutputStream(stadtPath);
+            fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
+            objectWriter.writeValue(fileWriter, getStadtList());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * writes the landList to the JSON-file
+     */
+    private static void writeLandJSON() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
+        FileOutputStream fileOutputStream = null;
+        Writer fileWriter;
+
+
+
+        String filmPath = Config.getProperty("landJSON");
+        try {
+            fileOutputStream = new FileOutputStream(filmPath);
+            fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
+            objectWriter.writeValue(fileWriter, getStadtList());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     //* Getter and Setter
 
     /**
@@ -115,11 +202,10 @@ public class DataHandler {
      *
      * @return value of stadtList
      */
-
     private static List<Stadt> getStadtList() {
         if (stadtList == null) {
             setStadtList(new ArrayList<>());
-            readLandJSON();
+            readStadtJSON();
         }
         return stadtList;
     }
@@ -129,7 +215,9 @@ public class DataHandler {
      *
      * @param stadtList the value to set
      */
-    private static void setStadtList(List<Stadt> stadtList) { DataHandler.stadtList = stadtList; }
+    private static void setStadtList(List<Stadt> stadtList) {
+        DataHandler.stadtList = stadtList;
+    }
 
     /**
      * gets landList
@@ -139,7 +227,7 @@ public class DataHandler {
     private static List<Land> getLandList() {
         if (landList == null) {
             setLandList(new ArrayList<>());
-            readStadtJSON();
+            readLandJSON();
         }
         return landList;
     }
@@ -149,5 +237,4 @@ public class DataHandler {
      *
      * @param landList the value to set
      */
-    private static void setLandList(List<Land> landList) {DataHandler.landList = landList; }
-}
+    private static void setLandList(List<Land> landList) {DataHandler.landList = landList; }}
