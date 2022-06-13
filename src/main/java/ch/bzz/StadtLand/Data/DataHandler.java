@@ -1,11 +1,14 @@
 package ch.bzz.StadtLand.Data;
-import ch.bzz.StadtLand.Model.Stadt;
+
+
 import ch.bzz.StadtLand.Model.Land;
+import ch.bzz.StadtLand.Model.Stadt;
 import ch.bzz.StadtLand.Service.Config;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -16,7 +19,7 @@ import java.util.List;
 /**
  * reads and writes the data in the JSON-files
  */
-public class DataHandler {
+public final class DataHandler {
     private static List<Stadt> stadtList;
     private static List<Land> landList;
 
@@ -26,25 +29,26 @@ public class DataHandler {
     private DataHandler() {
     }
 
-    //Potenzielle Fehlerquelle
+    /**
+     * initialize the lists with the data
+     */
     public static void initLists() {
         DataHandler.setStadtList(null);
         DataHandler.setLandList(null);
     }
 
-
     /**
-     * reads all staedte
-     * @return list of staedte
+     * reads all books
+     * @return list of books
      */
     public static List<Stadt> readAllStaedte() {
         return getStadtList();
     }
 
     /**
-     * reads a stadt by its uuid
-     * @param stadtUUID uuid of stadt
-     * @return stadt (null=not found)
+     * reads a book by its uuid
+     * @param bookUUID
+     * @return the Book (null=not found)
      */
     public static Stadt readStadtByUUID(String stadtUUID) {
         Stadt stadt = null;
@@ -57,17 +61,50 @@ public class DataHandler {
     }
 
     /**
-     * reads all laender
-     * @return list of laender
+     * inserts a new book into the bookList
+     *
+     * @param book the book to be saved
+     */
+    public static void insertStadt(Stadt stadt) {
+        getStadtList().add(stadt);
+        writeStadtJSON();
+    }
+
+    /**
+     * updates the bookList
+     */
+    public static void updateStadt() {
+        writeStadtJSON();
+    }
+
+    /**
+     * deletes a book identified by the bookUUID
+     * @param bookUUID  the key
+     * @return  success=true/false
+     */
+    public static boolean deleteStadt(String stadtUUID) {
+        Stadt stadt = readStadtByUUID(stadtUUID);
+        if (stadt != null) {
+            getStadtList().remove(stadt);
+            writeStadtJSON();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * reads all publishers
+     * @return list of books
      */
     public static List<Land> readAllLaender() {
         return getLandList();
     }
 
     /**
-     * reads a land by its laendercode
-     * @param laendercode specific code for each land
-     * @return the land (null=not found)
+     * reads a publisher by its uuid
+     * @param publisherUUID
+     * @return the Publisher (null=not found)
      */
     public static Land readLandByLaendercode(String laendercode) {
         Land land = null;
@@ -80,7 +117,40 @@ public class DataHandler {
     }
 
     /**
-     * reads the stadt from the JSON-file
+     * inserts a new publisher into the bookList
+     *
+     * @param publisher the publisher to be saved
+     */
+    public static void insertLand(Land land) {
+        getLandList().add(land);
+        writeLandJSON();
+    }
+
+    /**
+     * updates the publisherList
+     */
+    public static void updateLand() {
+        writeLandJSON();
+    }
+
+    /**
+     * deletes a publisher identified by the publisherUUID
+     * @param publisherUUID  the key
+     * @return  success=true/false
+     */
+    public static boolean deleteLand(String laendercode) {
+        Land land = readLandByLaendercode(laendercode);
+        if (land != null) {
+            getLandList().remove(land);
+            writeLandJSON();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * reads the books from the JSON-file
      */
     private static void readStadtJSON() {
         try {
@@ -99,7 +169,26 @@ public class DataHandler {
     }
 
     /**
-     * reads the land from the JSON-file
+     * writes the bookList to the JSON-file
+     */
+    private static void writeStadtJSON() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
+        FileOutputStream fileOutputStream = null;
+        Writer fileWriter;
+
+        String stadtPath = Config.getProperty("stadtJSON");
+        try {
+            fileOutputStream = new FileOutputStream(stadtPath);
+            fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
+            objectWriter.writeValue(fileWriter, getStadtList());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * reads the publishers from the JSON-file
      */
     private static void readLandJSON() {
         try {
@@ -119,63 +208,7 @@ public class DataHandler {
     }
 
     /**
-     * inserts a new stadt into the stadtlist
-     *
-     * @param stadt eine stadt
-     */
-    public static void insertStadt(Stadt stadt) {
-        getStadtList().add(stadt);
-        writeStadtJSON();
-    }
-
-    /**
-     * updates the stadtlist
-     */
-    public static void updateStadt() {
-        writeStadtJSON();
-    }
-
-    /**
-     * deletes a stadt by the stadtUuid
-     * @param stadtUuid uuid of stadt
-     * @return success=true/false
-     */
-    public static boolean deleteStadt(String stadtUuid) {
-        Stadt stadt = readStadtByUUID(stadtUuid);
-        if (stadt != null) {
-           getStadtList().remove(stadt);
-           writeStadtJSON();
-           return true;
-        } else {
-            return false;
-        }
-    }
-
-    //* Writer
-
-    /**
-     * writes the stadtList to the JSON-file
-     */
-    private static void writeStadtJSON() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
-        FileOutputStream fileOutputStream = null;
-        Writer fileWriter;
-
-
-
-        String stadtPath = Config.getProperty("stadtJSON");
-        try {
-            fileOutputStream = new FileOutputStream(stadtPath);
-            fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
-            objectWriter.writeValue(fileWriter, getStadtList());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    /**
-     * writes the landList to the JSON-file
+     * writes the publisherList to the JSON-file
      */
     private static void writeLandJSON() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -183,26 +216,24 @@ public class DataHandler {
         FileOutputStream fileOutputStream = null;
         Writer fileWriter;
 
-
-
-        String filmPath = Config.getProperty("landJSON");
+        String landPath = Config.getProperty("landJSON");
         try {
-            fileOutputStream = new FileOutputStream(filmPath);
+            fileOutputStream = new FileOutputStream(landPath);
             fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
-            objectWriter.writeValue(fileWriter, getStadtList());
+            objectWriter.writeValue(fileWriter, getLandList());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    //* Getter and Setter
-
     /**
-     * gets stadtList
+     * gets bookList
      *
-     * @return value of stadtList
+     * @return value of bookList
      */
+
     private static List<Stadt> getStadtList() {
+
         if (stadtList == null) {
             setStadtList(new ArrayList<>());
             readStadtJSON();
@@ -211,30 +242,39 @@ public class DataHandler {
     }
 
     /**
-     * sets stadtList
+     * sets bookList
      *
-     * @param stadtList the value to set
+     * @param bookList the value to set
      */
+
     private static void setStadtList(List<Stadt> stadtList) {
         DataHandler.stadtList = stadtList;
     }
 
     /**
-     * gets landList
+     * gets publisherList
      *
-     * @return value of landList
+     * @return value of publisherList
      */
+
     private static List<Land> getLandList() {
         if (landList == null) {
             setLandList(new ArrayList<>());
             readLandJSON();
         }
+
         return landList;
     }
 
     /**
-     * sets landList
+     * sets publisherList
      *
-     * @param landList the value to set
+     * @param publisherList the value to set
      */
-    private static void setLandList(List<Land> landList) {DataHandler.landList = landList; }}
+
+    private static void setLandList(List<Land> landList) {
+        DataHandler.landList = landList;
+    }
+
+
+}

@@ -8,12 +8,8 @@ import javax.validation.constraints.*;
 //import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
 
-
-/**
- * a city (stadt) in a country (land)
- */
-public class Stadt {
-    @JsonIgnore
+/*
+@JsonIgnore
     private Land land;
 
     @FormParam("uuid")
@@ -35,72 +31,76 @@ public class Stadt {
     @Min(1)
     @NotNull
     private Double flaeche;
+ */
 
-    //* Getter and Setter
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-    //test
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+/**
+ * a book in the bookshelf
+ */
+public class Stadt {
+    @JsonIgnore
+    private Land land;
+
+    @FormParam("uuid")
+    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
+    private String uuid;
+
+    @FormParam("bezeichnung")
+    @NotEmpty
+    @Size(min=3, max=30)
+    private String bezeichnung;
+
+    @FormParam("bevoelkerung")
+    @NotNull //NotNull?
+    @Min(1)
+    private Integer bevoelkerung;
+
+    @FormParam("flaeche")
+    @NotNull
+    @DecimalMax(value="199.95")
+    @DecimalMin(value="0.05")
+    private BigDecimal flaeche;
+
+    /**
+     * gets the publisherUUID from the Publisher-object
+     * @return
+     */
     public String getLaendercode() {
         if (getLand()== null) return null;
         return getLand().getLaenderCode();
     }
 
-    public void setLandByLaendercode(String laendercode) {
+    /**
+     * creates a Publisher-object without the booklist
+     * @param publisherUUID the key
+     */
+    public void setLaendercode(String laendercode) {
         setLand(new Land());
         Land land = DataHandler.readLandByLaendercode(laendercode);
-        //setLand(land);
         getLand().setLaenderCode(laendercode);
-        //getLand().setBezeichnung(land.getBezeichnung());
-        /* if (land != null) {
-            getLand().setBezeichnung(land.getBezeichnung());
-            getLand().setGruendungsJahr(land.getGruendungsJahr());
-            getLand().setBevoelkerung(land.getBevoelkerung());
-            getLand().setFlaeche(land.getFlaeche());
-        }
-         */
+        getLand().setBezeichnung(land.getBezeichnung());
+        //Pottentielle Fehlerquelle
+        getLand().setBevoelkerung(land.getBevoelkerung());
+        getLand().setFlaeche(land.getFlaeche());
+        getLand().setGruendungsJahr(land.getGruendungsJahr());
     }
 
     /**
-     * gets UUID
+     * gets publisher
      *
-     * @return value of UUID
-     */
-    public String getUuid() { return uuid; }
-
-    /**
-     * sets uuid
-     *
-     * @param uuid the value to set
-     */
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    /**
-     * gets bezeichnung
-     *
-     * @return value of bezeichnung
-     */
-    public String getBezeichnung() { return bezeichnung; }
-
-    /**
-     * sets bezeichnung
-     *
-     * @param bezeichnung the value to set
-     */
-    public void setBezeichnung(String bezeichnung) { this.bezeichnung = bezeichnung; }
-
-    /**
-     * gets Land
-     *
-     * @return Land
-     *
+     * @return value of publisher
      */
     public Land getLand() {
         return land;
     }
 
     /**
-     * sets Land
+     * sets publisher
      *
      * @param land the value to set
      */
@@ -109,39 +109,82 @@ public class Stadt {
     }
 
     /**
-     * gets bevoelkerung
+     * gets bookUUID
      *
-     * @return value of bevoelkerung
+     * @return value of bookUUID
      */
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    /**
+     * sets bookUUID
+     *
+     * @param bookUUID the value to set
+     */
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    /**
+     * gets title
+     *
+     * @return value of title
+     */
+
+    public String getBezeichnung() {
+        return bezeichnung;
+    }
+
+    /**
+     * sets title
+     *
+     * @param bezeichnung the value to set
+     */
+
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
+    }
+
+    /**
+     * gets author
+     *
+     * @return value of author
+     */
+
     public Integer getBevoelkerung() {
         return bevoelkerung;
     }
 
     /**
-     * sets bevoelkerung
+     * sets author
      *
      * @param bevoelkerung the value to set
      */
+
     public void setBevoelkerung(Integer bevoelkerung) {
         this.bevoelkerung = bevoelkerung;
     }
 
+
     /**
-     * gets flaeche
+     * gets price
      *
-     * @return value of flaeche
+     * @return value of price
      */
-    public Double getFlaeche() {
+    public BigDecimal getFlaeche() {
         return flaeche;
     }
 
     /**
-     * sets flaeche
+     * sets price
      *
      * @param flaeche the value to set
      */
-    public void setFlaeche(Double flaeche) {
+
+    public void setFlaeche(BigDecimal flaeche) {
         this.flaeche = flaeche;
     }
-
 }

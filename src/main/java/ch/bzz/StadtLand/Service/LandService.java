@@ -1,10 +1,12 @@
 package ch.bzz.StadtLand.Service;
 import ch.bzz.StadtLand.Model.Land;
 import ch.bzz.StadtLand.Data.DataHandler;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import ch.bzz.StadtLand.Model.Stadt;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -50,6 +52,80 @@ public class LandService {
                 .status(200)
                 .entity(land)
                 .build();
+    }
+
+    /**
+     * creates a new Land
+     * @param land which is created
+     * @return httpStatus
+     */
+    @PUT
+    @Path("create")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response insertLand(
+            @Valid @BeanParam Land land
+    ) {
+        DataHandler.insertLand(land);
+
+        return Response
+                .status(200)
+                .entity("")
+                .build();
+    }
+
+    /**
+     * updates a new land
+     * @param land the land to update
+     * @return Response
+     */
+    @PUT
+    @Path("update")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response updateLand(
+            @Valid @BeanParam Land land,
+            @NotEmpty
+            @Pattern(regexp = "[A-Z]{2}-[A-Z]{3}-[0-9]{3}")
+            @FormParam("laendercode") String laendercode
+    ) {
+        int httpStatus = 200;
+        Land oldLand = DataHandler.readLandByLaendercode(land.getLaenderCode());
+        if (oldLand != null) {
+            oldLand.setBezeichnung(land.getBezeichnung());
+            oldLand.setBevoelkerung(land.getBevoelkerung());
+            oldLand.setFlaeche(land.getFlaeche());
+            oldLand.setLaenderCode(land.getLaenderCode());
+            oldLand.setGruendungsJahr(land.getGruendungsJahr());
+
+            DataHandler.updateLand();
+        } else {
+            httpStatus = 410;
+        }
+        return Response
+                .status(httpStatus)
+                .entity("")
+                .build();
+    }
+
+    /**
+     * Deletes a land identified by it laendercode
+     * @param laendercode of land
+     * @return httpStatus
+     */
+
+    @DELETE
+    @Path("delete")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response deleteLand(
+            @NotEmpty
+            @Pattern(regexp = "[A-Z]{2}-[A-Z]{3}-[0-9]{3}")
+            @FormParam("laendercode") String laendercode
+    ) {
+        int httpStatus = 200;
+        if (DataHandler.deleteLand(laendercode)) {
+            httpStatus = 410;
+        }
+        return Response
+                .status(httpStatus).entity("").build();
     }
 }
 
