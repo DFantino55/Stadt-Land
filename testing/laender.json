@@ -1,51 +1,25 @@
-[
-    {
-        "laenderCode": "ch-che-756",
-        "bezeichnung": "schweiz",
-        "gruendungsJahr": 1848,
-        "bevoelkerung": 8500000,
-        "flaeche": 412777
-    }, 
-    {
-        "laenderCode": "es-esp-724",
-        "bezeichnung": "spanien",
-        "gruendungsJahr": 1978,
-        "bevoelkerung": 46600000,
-        "flaeche": 502370
-    }, 
-    {
-        "laenderCode": "it-ita-380",
-        "bezeichnung": "italien",
-        "gruendungsJahr": 1946,
-        "bevoelkerung": 60500000,
-        "flaeche": 301340
-    }, 
-    {
-        "laenderCode": "gr-grc-300",
-        "bezeichnung": "griechenland",
-        "gruendungsJahr": 1830,
-        "bevoelkerung": 10700000,
-        "flaeche": 131957
-    }, 
-    {
-        "laenderCode": "se-swe-752",
-        "bezeichnung": "schweden",
-        "gruendungsJahr": 1523,
-        "bevoelkerung": 10100000,
-        "flaeche": 450295
-    }, 
-    {
-        "laenderCode": "de-deu-276",
-        "bezeichnung": "deutschland",
-        "gruendungsJahr": 1949,
-        "bevoelkerung": 83100000,
-        "flaeche": 357.121
-    },
-    {
-        "laenderCode": "fr-fra-250",
-        "bezeichnung": "frankreich",
-        "gruendungsJahr": 1792,
-        "bevoelkerung": 65000000,
-        "flaeche": 551500
-    }
-]   
+[ {
+  "laenderCode" : "CH-CHE-756",
+  "bezeichnung" : "schweiz",
+  "gruendungsJahr" : 1848,
+  "bevoelkerung" : 8500000,
+  "flaeche" : 412777.0
+}, {
+  "laenderCode" : "ES-ESP-724",
+  "bezeichnung" : "spanien",
+  "gruendungsJahr" : 1978,
+  "bevoelkerung" : 446600000,
+  "flaeche" : 502370.0
+}, {
+  "laenderCode" : "IT-ITA-380",
+  "bezeichnung" : "italien",
+  "gruendungsJahr" : 1946,
+  "bevoelkerung" : 60500000,
+  "flaeche" : 301340.0
+}, {
+  "laenderCode" : "GR-GRC-300",
+  "bezeichnung" : "griechenland",
+  "gruendungsJahr" : 1830,
+  "bevoelkerung" : 10700000,
+  "flaeche" : 131957.0
+} ]

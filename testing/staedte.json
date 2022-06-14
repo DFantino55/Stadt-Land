@@ -1,107 +1,103 @@
-[
-    {
-        "uuid": "11111",
-        "bezeichnung": "zuerich",
-        "land": {
-        "laenderCode": "ch-che-756",
-        "bezeichnung": "schweiz",
-        "gruendungsJahr": 1848,
-        "bevoelkerung": 8500000,
-        "flaeche": 412777
-        },
-        "bevoelkerung": 12000,
-        "flaeche": 1200
-    },
-    {
-        "uuid": "11112",
-        "bezeichnung": "bern",
-        "land": {
-        "laenderCode": "ch-che-756",
-        "bezeichnung": "schweiz",
-        "gruendungsJahr": 1848,
-        "bevoelkerung": 8500000,
-        "flaeche": 412777
-        },
-        "bevoelkerung": 14500,
-        "flaeche": 1100
-    },
-    {
-        "uuid": "11113",
-        "bezeichnung": "rom",
-        "land": {
-        "laenderCode": "it-ita-380",
-        "bezeichnung": "italien",
-        "gruendungsJahr": 1946,
-        "bevoelkerung": 60500000,
-        "flaeche": 301340
-        },
-        "bevoelkerung": 22000,
-        "flaeche": 800
-    },
-    {
-        "uuid": "11114",
-        "bezeichnung": "madrid",
-        "land": {
-        "laenderCode": "es-esp-724",
-        "bezeichnung": "spanien",
-        "gruendungsJahr": 1978,
-        "bevoelkerung": 46600000,
-        "flaeche": 502370
-        },
-        "bevoelkerung": 66000,
-        "flaeche": 2400
-    },
-    {
-        "uuid": "11115",
-        "bezeichnung": "athen",
-        "land": {
-        "laenderCode": "gr-grc-300",
-        "bezeichnung": "griechenland",
-        "gruendungsJahr": 1830,
-        "bevoelkerung": 10700000,
-        "flaeche": 131957
-        },
-        "bevoelkerung": 21000,
-        "flaeche": 1300
-    },
-    {
-        "uuid": "11116",
-        "bezeichnung": "stockholm",
-        "land": {
-        "laenderCode": "se-swe-752",
-        "bezeichnung": "schweden",
-        "gruendungsJahr": 1523,
-        "bevoelkerung": 10100000,
-        "flaeche": 450295
-        },
-        "bevoelkerung": 44000,
-        "flaeche": 750
-    },
-    {
-        "uuid": "11117",
-        "bezeichnung": "Berlin",
-        "land": {
-        "laenderCode": "de-deu-276",
-        "bezeichnung": "deutschland",
-        "gruendungsJahr": 1949,
-        "bevoelkerung": 83100000,
-                "flaeche": 357.121
-        },
-        "bevoelkerung": 86000,
-        "flaeche": 27000
-    },
-    {
-        "uuid": "11118",
-        "bezeichnung": "Paris",
-        "land": {
-        "laenderCode": "fr-fra-250",
-        "bezeichnung": "frankreich",
-        "gruendungsJahr": 1792,
-        "bevoelkerung": 65000000,
-        "flaeche": 551500
-        },
-        "bevoelkerung": 6000,
-        "flaeche": 31000
-    }
-
-]
+[ {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab",
+  "bezeichnung" : "Niederhasli",
+  "bevoelkerung" : 160,
+  "flaeche" : 100,
+  "laendercode" : "FR-FRA-250"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaac",
+  "bezeichnung" : "rom",
+  "bevoelkerung" : 22000,
+  "flaeche" : 800,
+  "laendercode" : "IT-ITA-380"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaad",
+  "bezeichnung" : "madrid",
+  "bevoelkerung" : 66000,
+  "flaeche" : 2400,
+  "laendercode" : "ES-ESP-724"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaae",
+  "bezeichnung" : "athen",
+  "bevoelkerung" : 21000,
+  "flaeche" : 1300,
+  "laendercode" : "GR-GRC-300"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+  "bezeichnung" : "stockholm",
+  "bevoelkerung" : 44000,
+  "flaeche" : 750,
+  "laendercode" : "SE-SWE-752"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+  "bezeichnung" : "stockholm",
+  "bevoelkerung" : 44000,
+  "flaeche" : 750,
+  "laendercode" : "SE-SWE-752"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+  "bezeichnung" : "stockholm",
+  "bevoelkerung" : 44000,
+  "flaeche" : 750,
+  "laendercode" : "SE-SWE-752"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+  "bezeichnung" : "stockholm",
+  "bevoelkerung" : 44000,
+  "flaeche" : 750,
+  "laendercode" : "SE-SWE-752"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+  "bezeichnung" : "stockholm",
+  "bevoelkerung" : 44000,
+  "flaeche" : 750,
+  "laendercode" : "SE-SWE-752"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+  "bezeichnung" : "stockholm",
+  "bevoelkerung" : 44000,
+  "flaeche" : 750,
+  "laendercode" : "SE-SWE-752"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+  "bezeichnung" : "stockholm",
+  "bevoelkerung" : 44000,
+  "flaeche" : 750,
+  "laendercode" : "SE-SWE-752"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+  "bezeichnung" : "stockholm",
+  "bevoelkerung" : 44000,
+  "flaeche" : 750,
+  "laendercode" : "SE-SWE-752"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+  "bezeichnung" : "stockholm",
+  "bevoelkerung" : 44000,
+  "flaeche" : 750,
+  "laendercode" : "SE-SWE-752"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+  "bezeichnung" : "stockholm",
+  "bevoelkerung" : 44000,
+  "flaeche" : 750,
+  "laendercode" : "SE-SWE-752"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+  "bezeichnung" : "stockholm",
+  "bevoelkerung" : 44000,
+  "flaeche" : 750,
+  "laendercode" : "SE-SWE-752"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaf",
+  "bezeichnung" : "Berlin",
+  "bevoelkerung" : 86000,
+  "flaeche" : 27000,
+  "laendercode" : "DE-DEU-276"
+}, {
+  "uuid" : "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+  "bezeichnung" : "stockholm",
+  "bevoelkerung" : 44000,
+  "flaeche" : 750,
+  "laendercode" : "SE-SWE-752"
+} ]

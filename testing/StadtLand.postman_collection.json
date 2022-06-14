@@ -7,6 +7,19 @@
 	"item": [
 		{
 			"name": "0.1 Testservice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -28,13 +41,15 @@
 			"response": []
 		},
 		{
-			"name": "1.0 list all staedte",
+			"name": "1.1 list all staedte",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -61,63 +76,20 @@
 			"response": []
 		},
 		{
-			"name": "1.1 read stadt by uuid",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/read?uuid=11111",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"Stadt-Land-1.0",
-						"resource",
-						"stadt",
-						"read"
-					],
-					"query": [
-						{
-							"key": "uuid",
-							"value": "11111"
-						}
-					]
+			"name": "1.2 list all laender",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "1.2 read stadt by uuid not found",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/read?uuid=12345815504754574584795837594857938",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"Stadt-Land-1.0",
-						"resource",
-						"stadt",
-						"read"
-					],
-					"query": [
-						{
-							"key": "uuid",
-							"value": "12345815504754574584795837594857938"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "2.1 list all laender",
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -139,12 +111,25 @@
 			"response": []
 		},
 		{
-			"name": "2.2 read land by laendercode",
+			"name": "2.1.1 read stadt by uuid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/read?laendercode=ch-che-756",
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/read?uuid=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -153,13 +138,13 @@
 					"path": [
 						"Stadt-Land-1.0",
 						"resource",
-						"land",
+						"stadt",
 						"read"
 					],
 					"query": [
 						{
-							"key": "laendercode",
-							"value": "ch-che-756"
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab"
 						}
 					]
 				}
@@ -167,12 +152,148 @@
 			"response": []
 		},
 		{
-			"name": "2.3 read land by laendercode not found",
+			"name": "2.1.2 read stadt by uuid wrong value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/read?laendercode=ch-che-123456789987654321",
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/read?uuid=aaaaaaaaaaaaaaaa99aaaaaaaaggh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaaaaaaaaaa99aaaaaaaaggh"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.1.3 read stadt by uuid not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(410);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/read?uuid=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaafff",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaafff"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.1.4 read stadt by uuid no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/read?uuid=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.2.1 read land by laendercode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/read?laendercode=CH-CHE-756",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -187,7 +308,3715 @@
 					"query": [
 						{
 							"key": "laendercode",
-							"value": "ch-che-123456789987654321"
+							"value": "CH-CHE-756"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.2.2 read land by laendercode wrong value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/read?laendercode=123456789",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"read"
+					],
+					"query": [
+						{
+							"key": "laendercode",
+							"value": "123456789"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.2.3 read land by laendercode not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(410);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/read?laendercode=AT-AUT-040",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"read"
+					],
+					"query": [
+						{
+							"key": "laendercode",
+							"value": "AT-AUT-040"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.2.4 read land by laendercode no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/read?laendercode=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"read"
+					],
+					"query": [
+						{
+							"key": "laendercode",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.1 insert Stadt",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaf",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Berlin",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "86000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "27000",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "DE-DEU-276",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.2 insert Stadt uuid no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.3 insert Stadt uuid wrong value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "ddd",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.4 insert Stadt bezeichnung no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.5 insert Stadt bezeichnung value to short",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "dd",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.6 insert Stadt bezeichnung value to long",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "DasSindDefinitivMehrAlsDreissigZeichen",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.7 insert Stadt bevoelkerung no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.8 insert Stadt bevoelkerung value to low",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.9 insert Stadt flaeche no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.10 insert Stadt flaeche value to low",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.11 insert Stadt laendercode no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.12 insert Stadt laendercode wrong value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "fr-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1.13 insert Stadt laendercode doesn't exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "stockholm",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "44000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "750",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "SE-SWE-752",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2.1 insert Land",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2.2 insert Land laendercode no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2.3 insert Land laendercode wrong value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "fr-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2.4 insert Land bezeichnung no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2.5 insert Land bezeichnung value to short",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "fr",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2.6 insert Land bezeichnung value to long",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "DasSindDefinitivMehrAlsDreissigZeichen",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2.7 insert Land gruendungsJahr no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2.8 insert Land gruendungsJahr value to high",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "2023",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2.9 insert Land bevoelkerung no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2.10 insert Land bevoelkerung to low",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2.11 insert Land flaeche no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2.12 insert Land flaeche to low",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.1 update Stadt",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Niederhasli",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "160",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					],
+					"query": [
+						{
+							"key": "stadtUuid",
+							"value": "ddd",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.2 update Stadt uuid no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.3 update Stadt uuid wrong value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "ddd",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.4 update Stadt bezeichnung no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.5 update Stadt bezeichnung value to short",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "dd",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.6 update Stadt bezeichnung value to long",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "DasSindDefinitivMehrAlsDreissigZeichen",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.7 update Stadt bevoelkerung no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.8 update Stadt bevoelkerung value to low",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.9 update Stadt flaeche no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.10 update Stadt flaeche value to low",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.11 update Stadt laendercode no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.12 update Stadt laendercode wrong value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Paris",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "150",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "fr-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1.13 update Stadt laendercode doesn't exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaabb",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "stockholm",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "44000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "750",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "SE-SWE-752",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2.1 update Land",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2.2 update Land laendercode no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2.3 update Land laendercode wrong value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "fr-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2.4 update Land bezeichnung no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2.5 update Land bezeichnung value to short",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "fr",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2.6 update Land bezeichnung value to long",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "DasSindDefinitivMehrAlsDreissigZeichen",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2.7 update Land gruendungsJahr no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2.8 update Land gruendungsJahr value to high",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "2023",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2.9 update Land bevoelkerung no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2.10 update Land bevoelkerung to low",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2.11 insert Land flaeche no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2.12 update Land flaeche to low",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.1.1 delete Stadt by uuid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/delete?uuid=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.1.2 delete Stadt by uuid wrong value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/delete?uuid=123456789",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "123456789"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.1.3 delete Stadt by uuid not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(410);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/delete?uuid=aaaaaaaa-cccc-cccc-cccc-aaaaaaaaaaaa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-cccc-cccc-cccc-aaaaaaaaaaaa"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.1.4 delete Stadt by uuid no value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/delete?uuid=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.2.1 delete Land by laendercode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/delete?laendercode=FR-FRA-250",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.2.2 delete Land by laendercode wrong value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/delete?laendercode=fr-FRA-250",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "laendercode",
+							"value": "fr-FRA-250"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.2.3 delete Land by laendercode not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(410);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/delete?laendercode=AT-AUT-040",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "laendercode",
+							"value": "AT-AUT-040"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.2.4 delete Land by laendercode no value value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/delete?laendercode=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "laendercode",
+							"value": ""
 						}
 					]
 				}
