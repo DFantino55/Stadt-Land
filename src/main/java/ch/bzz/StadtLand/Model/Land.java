@@ -1,4 +1,5 @@
 package ch.bzz.StadtLand.Model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.*;
 import javax.ws.rs.FormParam;
@@ -18,10 +19,8 @@ public class Land {
     @Size(min=3, max=30)
     private String bezeichnung;
 
-    //@JsonIgnore
-    // String
-    @FormParam("stadtList")
-    private List<String> stadtList;
+    @JsonIgnore
+    private List<Stadt> stadtList;
 
     @FormParam("gruendungsJahr")
     @NotNull
@@ -75,14 +74,14 @@ public class Land {
      *
      * @return Wert der stadtList
      */
-    public List<String> getStadtList() { return stadtList; }
+    public List<Stadt> getStadtList() { return stadtList; }
 
     /**
      * Setter für stadtList
      *
      * @param stadtList der gesetzte Wert
      */
-    public void setStadtList(List<String> stadtList) { this.stadtList = stadtList; }
+    public void setStadtList(List<Stadt> stadtList) { this.stadtList = stadtList; }
 
     /**
      * Getter für gruendungsjahr

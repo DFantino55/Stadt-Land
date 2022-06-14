@@ -132,7 +132,7 @@ public class LandService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteLand(
             @Pattern(regexp = "[A-Z]{2}-[A-Z]{3}-[0-9]{3}")
-            @FormParam("laendercode") String laendercode
+            @QueryParam("laendercode") String laendercode
     ) {
         int httpStatus = 200;
         if (!DataHandler.deleteLand(laendercode)) {

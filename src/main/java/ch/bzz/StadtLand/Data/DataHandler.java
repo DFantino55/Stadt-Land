@@ -1,14 +1,10 @@
 package ch.bzz.StadtLand.Data;
-
-
 import ch.bzz.StadtLand.Model.Land;
 import ch.bzz.StadtLand.Model.Stadt;
 import ch.bzz.StadtLand.Service.Config;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -17,20 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * reads and writes the data in the JSON-files
+ * schreibt und liest daten aus/in JSON-Files
  */
 public final class DataHandler {
     private static List<Stadt> stadtList;
     private static List<Land> landList;
 
     /**
-     * private constructor defeats instantiation
+     * privater Konstruktor verhindert Instanzierung
      */
     private DataHandler() {
     }
 
     /**
-     * initialize the lists with the data
+     * setzt die listen zum wert null
      */
     public static void initLists() {
         DataHandler.setStadtList(null);
@@ -38,17 +34,17 @@ public final class DataHandler {
     }
 
     /**
-     * reads all books
-     * @return list of books
+     * liest alle stadte
+     * @return liste aller städte
      */
     public static List<Stadt> readAllStaedte() {
         return getStadtList();
     }
 
     /**
-     * reads a book by its uuid
-     * @param bookUUID
-     * @return the Book (null=not found)
+     * liest eine stadt durch uuid
+     * @param stadtUUID uuid der stadt
+     * @return die stadt oder null
      */
     public static Stadt readStadtByUUID(String stadtUUID) {
         Stadt stadt = null;
@@ -61,9 +57,9 @@ public final class DataHandler {
     }
 
     /**
-     * inserts a new book into the bookList
+     * führt eine neue stadt in list ein
      *
-     * @param book the book to be saved
+     * @param stadt die gespeichert wird
      */
     public static void insertStadt(Stadt stadt) {
         getStadtList().add(stadt);
@@ -71,7 +67,7 @@ public final class DataHandler {
     }
 
     /**
-     * updates the bookList
+     * aktualisiert stadtList
      */
     public static void updateStadt() {
         writeStadtJSON();
@@ -79,8 +75,9 @@ public final class DataHandler {
 
     /**
      * deletes a book identified by the bookUUID
-     * @param bookUUID  the key
-     * @return  success=true/false
+     * löscht stadt durch uuid
+     * @param stadtUUID uuid der stadt
+     * @return  erfolgreich oder nicht
      */
     public static boolean deleteStadt(String stadtUUID) {
         Stadt stadt = readStadtByUUID(stadtUUID);
@@ -94,17 +91,17 @@ public final class DataHandler {
     }
 
     /**
-     * reads all publishers
-     * @return list of books
+     * liest alle länder
+     * @return liste aller länder
      */
     public static List<Land> readAllLaender() {
         return getLandList();
     }
 
     /**
-     * reads a publisher by its uuid
-     * @param publisherUUID
-     * @return the Publisher (null=not found)
+     * liest ein land durch laendercode
+     * @param laendercode des landes
+     * @return land oder null
      */
     public static Land readLandByLaendercode(String laendercode) {
         Land land = null;
@@ -117,9 +114,9 @@ public final class DataHandler {
     }
 
     /**
-     * inserts a new publisher into the bookList
+     * fügt ein neues land in die stadtlist ein
      *
-     * @param publisher the publisher to be saved
+     * @param land zu speicherndes land
      */
     public static void insertLand(Land land) {
         getLandList().add(land);
@@ -127,16 +124,16 @@ public final class DataHandler {
     }
 
     /**
-     * updates the publisherList
+     * aktualisiert landlist
      */
     public static void updateLand() {
         writeLandJSON();
     }
 
     /**
-     * deletes a publisher identified by the publisherUUID
-     * @param publisherUUID  the key
-     * @return  success=true/false
+     * löscht land durch laendercode
+     * @param laendercode des landes
+     * @return  erfolgreich oder nicht
      */
     public static boolean deleteLand(String laendercode) {
         Land land = readLandByLaendercode(laendercode);
@@ -150,7 +147,7 @@ public final class DataHandler {
     }
 
     /**
-     * reads the books from the JSON-file
+     * liest die Städte vom JSON-File
      */
     private static void readStadtJSON() {
         try {
@@ -169,7 +166,7 @@ public final class DataHandler {
     }
 
     /**
-     * writes the bookList to the JSON-file
+     * schreibt die stadlist in JSON-File
      */
     private static void writeStadtJSON() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -188,7 +185,7 @@ public final class DataHandler {
     }
 
     /**
-     * reads the publishers from the JSON-file
+     * liest die länder von der landList
      */
     private static void readLandJSON() {
         try {
@@ -208,7 +205,7 @@ public final class DataHandler {
     }
 
     /**
-     * writes the publisherList to the JSON-file
+     * schreibt die Länder in JSON-File
      */
     private static void writeLandJSON() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -227,9 +224,9 @@ public final class DataHandler {
     }
 
     /**
-     * gets bookList
+     * Getter für stadtList
      *
-     * @return value of bookList
+     * @return stadlist liste der städte
      */
 
     private static List<Stadt> getStadtList() {
@@ -242,9 +239,9 @@ public final class DataHandler {
     }
 
     /**
-     * sets bookList
+     * Setter für stadList
      *
-     * @param bookList the value to set
+     * @param stadtList die gesetzt wird
      */
 
     private static void setStadtList(List<Stadt> stadtList) {
@@ -252,9 +249,9 @@ public final class DataHandler {
     }
 
     /**
-     * gets publisherList
+     * Getter für landlist
      *
-     * @return value of publisherList
+     * @return landListe liste der länder
      */
 
     private static List<Land> getLandList() {
@@ -267,9 +264,9 @@ public final class DataHandler {
     }
 
     /**
-     * sets publisherList
+     * Getter für landList
      *
-     * @param publisherList the value to set
+     * @param landList liste der länder
      */
 
     private static void setLandList(List<Land> landList) {
