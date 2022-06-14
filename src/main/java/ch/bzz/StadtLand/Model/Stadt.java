@@ -47,6 +47,7 @@ public class Stadt {
     private Land land;
 
     @FormParam("uuid")
+    @NotEmpty
     @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String uuid;
 
@@ -56,14 +57,13 @@ public class Stadt {
     private String bezeichnung;
 
     @FormParam("bevoelkerung")
-    @NotNull //NotNull?
+    @NotNull
     @Min(1)
     private Integer bevoelkerung;
 
     @FormParam("flaeche")
     @NotNull
-    @DecimalMax(value="199.95")
-    @DecimalMin(value="0.05")
+    @DecimalMin(value="1.00")
     private BigDecimal flaeche;
 
     /**
@@ -81,13 +81,16 @@ public class Stadt {
      */
     public void setLaendercode(String laendercode) {
         setLand(new Land());
-        Land land = DataHandler.readLandByLaendercode(laendercode);
         getLand().setLaenderCode(laendercode);
-        getLand().setBezeichnung(land.getBezeichnung());
-        //Pottentielle Fehlerquelle
-        getLand().setBevoelkerung(land.getBevoelkerung());
-        getLand().setFlaeche(land.getFlaeche());
-        getLand().setGruendungsJahr(land.getGruendungsJahr());
+        if (DataHandler.readLandByLaendercode(laendercode) != null) {
+            Land land = DataHandler.readLandByLaendercode(laendercode);
+            getLand().setBezeichnung(land.getBezeichnung());
+            //Pottentielle Fehlerquelle
+            getLand().setBevoelkerung(land.getBevoelkerung());
+            getLand().setFlaeche(land.getFlaeche());
+            getLand().setGruendungsJahr(land.getGruendungsJahr());
+        }
+
     }
 
     /**

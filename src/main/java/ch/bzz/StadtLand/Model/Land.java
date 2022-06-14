@@ -6,6 +6,7 @@ import javax.validation.constraints.*;
 import javax.ws.rs.FormParam;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -24,6 +25,7 @@ public class Land {
     private String bezeichnung;
 
     @JsonIgnore
+    // String
     private List<Stadt> stadtList;
 
     @FormParam("gruendungsJahr")

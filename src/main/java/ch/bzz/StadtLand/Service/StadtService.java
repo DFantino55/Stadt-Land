@@ -72,7 +72,6 @@ public class StadtService {
             @Pattern(regexp = "[A-Z]{2}-[A-Z]{3}-[0-9]{3}")
             @FormParam("laendercode") String laendercode
     ) {
-
         stadt.setLaendercode(laendercode);
 
         DataHandler.insertStadt(stadt);
@@ -92,7 +91,7 @@ public class StadtService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateStadt(
             @Valid @BeanParam Stadt stadt,
-            @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
+            @Pattern(regexp = "[A-Z]{2}-[A-Z]{3}-[0-9]{3}")
             @FormParam("laendercode") String laendercode
     ) {
         int httpStatus = 200;
