@@ -1,13 +1,8 @@
 package ch.bzz.StadtLand.Service;
-
-
 import ch.bzz.StadtLand.Data.DataHandler;
 import ch.bzz.StadtLand.Model.Land;
-import ch.bzz.StadtLand.Model.Stadt;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.validation.Valid;
-//import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,14 +10,14 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * services for reading, adding, changing and deleting books
+ * Service für lesen, schreiben, bearbeiten und löschen von ländern
  */
 @Path("land")
 public class LandService {
 
     /**
-     * reads a list of all books
-     * @return  books as JSON
+     * liest alle länder
+     * @return  länder als JSON
      */
     @GET
     @Path("list")
@@ -36,9 +31,9 @@ public class LandService {
     }
 
     /**
-     * reads a book identified by the uuid
-     * @param bookUUID the key
-     * @return book
+     * reads a land by laendercode
+     * @param laendercode des landes
+     * @return land
      */
     @GET
     @Path("read")
@@ -60,8 +55,8 @@ public class LandService {
     }
 
     /**
-     * inserts a new book
-     * @param publisherUUID the uuid of the publisher
+     * fügt ein neues land ein
+     * @param land das eingefügt wird
      * @return Response
      */
     @POST
@@ -69,15 +64,7 @@ public class LandService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response insertLand(
             @Valid @BeanParam Land land
-            /*
-            ,@NotEmpty
-            @Pattern(regexp = "[A-Z]{2}-[A-Z]{3}-[0-9]{3}")
-            @FormParam("laendercode") String laendercode
-             */
     ) {
-
-        //stadt.setLaendercode(laendercode);
-
         DataHandler.insertLand(land);
         return Response
                 .status(200)
@@ -86,8 +73,8 @@ public class LandService {
     }
 
     /**
-     * updates a new book
-     * @param publisherUUID the uuid of the publisher
+     * aktualisiert ein land
+     * @param land das aktualisiert wird
      * @return Response
      */
     @PUT
@@ -95,10 +82,6 @@ public class LandService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateLand(
             @Valid @BeanParam Land land
-            /**,
-            @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @FormParam("laendercode") String laendercode */
-
     ) {
         int httpStatus = 200;
         Land oldLand = DataHandler.readLandByLaendercode(land.getLaenderCode());
@@ -107,11 +90,6 @@ public class LandService {
             oldLand.setGruendungsJahr(land.getGruendungsJahr());
             oldLand.setBevoelkerung(land.getBevoelkerung());
             oldLand.setFlaeche(land.getFlaeche());
-            /*
-            oldBook.setPrice(book.getPrice());
-            oldBook.setIsbn(book.getIsbn());
-            oldBook.setRelease(book.getRelease());
-             */
             DataHandler.updateLand();
         } else {
             httpStatus = 410;
@@ -123,8 +101,8 @@ public class LandService {
     }
 
     /**
-     * deletes a book identified by its uuid
-     * @param bookUUID  the key
+     * löscht ein land durch laendercode
+     * @param laendercode des lande
      * @return  Response
      */
     @DELETE

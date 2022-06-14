@@ -1,12 +1,8 @@
 package ch.bzz.StadtLand.Service;
-
-
 import ch.bzz.StadtLand.Data.DataHandler;
 import ch.bzz.StadtLand.Model.Stadt;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.validation.Valid;
-//import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,14 +10,14 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * services for reading, adding, changing and deleting books
+ * Service für lesen, schreiben, bearbeiten und löschen von städten
  */
 @Path("stadt")
 public class StadtService {
 
     /**
-     * reads a list of all books
-     * @return  books as JSON
+     * liest alle städte der stadList
+     * @return  städte als JSON
      */
     @GET
     @Path("list")
@@ -35,9 +31,9 @@ public class StadtService {
     }
 
     /**
-     * reads a book identified by the uuid
-     * @param bookUUID the key
-     * @return book
+     * liest eine stadt durch uuid
+     * @param stadtUUID uuid der stadt
+     * @return stadt
      */
     @GET
     @Path("read")
@@ -59,8 +55,8 @@ public class StadtService {
     }
 
     /**
-     * inserts a new book
-     * @param publisherUUID the uuid of the publisher
+     * fügt eine neue stadt ein
+     * @param laendercode des dazugehörigen landes
      * @return Response
      */
     @POST
@@ -82,8 +78,8 @@ public class StadtService {
     }
 
     /**
-     * updates a new book
-     * @param publisherUUID the uuid of the publisher
+     * aktualisiert eine stadt
+     * @param laendercode des dazugehörigen landes
      * @return Response
      */
     @PUT
@@ -101,11 +97,6 @@ public class StadtService {
             oldStadt.setBevoelkerung(stadt.getBevoelkerung());
             oldStadt.setFlaeche(stadt.getFlaeche());
             oldStadt.setLaendercode(laendercode);
-            /*
-            oldBook.setPrice(book.getPrice());
-            oldBook.setIsbn(book.getIsbn());
-            oldBook.setRelease(book.getRelease());
-             */
             DataHandler.updateStadt();
         } else {
             httpStatus = 410;
@@ -117,8 +108,8 @@ public class StadtService {
     }
 
     /**
-     * deletes a book identified by its uuid
-     * @param bookUUID  the key
+     * löscht eine stadt durch uuid
+     * @param stadtUUID uuid der stadt
      * @return  Response
      */
     @DELETE
