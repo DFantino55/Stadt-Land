@@ -2,45 +2,12 @@ package ch.bzz.StadtLand.Model;
 import ch.bzz.StadtLand.Data.DataHandler;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.validation.constraints.*;
-
-//import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
-
-/*
-@JsonIgnore
-    private Land land;
-
-    @FormParam("uuid")
-    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-    @NotEmpty
-    private String uuid;
-
-    @FormParam("bezeichnung")
-    @NotEmpty
-    @Size(min=3, max=30)
-    private String bezeichnung;
-
-    @FormParam("bevoelkerung")
-    @Min(1)
-    @NotNull
-    private Integer bevoelkerung;
-
-    @FormParam("flaeche")
-    @Min(1)
-    @NotNull
-    private Double flaeche;
- */
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 /**
- * a book in the bookshelf
+ * eine Stadt in einem Land
  */
 public class Stadt {
     @JsonIgnore
@@ -67,8 +34,8 @@ public class Stadt {
     private BigDecimal flaeche;
 
     /**
-     * gets the publisherUUID from the Publisher-object
-     * @return
+     * Getter für laendercode des Landes
+     * @return laendercode den Laendercode des Landes
      */
     public String getLaendercode() {
         if (getLand()== null) return null;
@@ -76,8 +43,8 @@ public class Stadt {
     }
 
     /**
-     * creates a Publisher-object without the booklist
-     * @param publisherUUID the key
+     * erstellt ein Land ohne die stadtList
+     * @param laendercode laendercode des Landes
      */
     public void setLaendercode(String laendercode) {
         setLand(new Land());
@@ -90,31 +57,30 @@ public class Stadt {
             getLand().setFlaeche(land.getFlaeche());
             getLand().setGruendungsJahr(land.getGruendungsJahr());
         }
-
     }
 
     /**
-     * gets publisher
+     * Getter für Land
      *
-     * @return value of publisher
+     * @return Land das Land
      */
     public Land getLand() {
         return land;
     }
 
     /**
-     * sets publisher
+     * Setter für Land
      *
-     * @param land the value to set
+     * @param land das Land das gesetzt wird
      */
     public void setLand(Land land) {
         this.land = land;
     }
 
     /**
-     * gets bookUUID
+     * Getter für uuid
      *
-     * @return value of bookUUID
+     * @return Wert der uuid der Stadt
      */
 
     public String getUuid() {
@@ -122,9 +88,9 @@ public class Stadt {
     }
 
     /**
-     * sets bookUUID
+     * Setter für uuid
      *
-     * @param bookUUID the value to set
+     * @param uuid uuid der Stadt
      */
 
     public void setUuid(String uuid) {
@@ -132,9 +98,9 @@ public class Stadt {
     }
 
     /**
-     * gets title
+     * Getter für bezeichnung
      *
-     * @return value of title
+     * @return bezeichnung der Stadt
      */
 
     public String getBezeichnung() {
@@ -142,9 +108,9 @@ public class Stadt {
     }
 
     /**
-     * sets title
+     * Setter für bezeichnung
      *
-     * @param bezeichnung the value to set
+     * @param bezeichnung der gesetzte Wert
      */
 
     public void setBezeichnung(String bezeichnung) {
@@ -152,9 +118,9 @@ public class Stadt {
     }
 
     /**
-     * gets author
+     * Getter für bevoelkerung
      *
-     * @return value of author
+     * @return bevoelkerung der Stadt
      */
 
     public Integer getBevoelkerung() {
@@ -162,9 +128,9 @@ public class Stadt {
     }
 
     /**
-     * sets author
+     * Setter für bevoelkerung
      *
-     * @param bevoelkerung the value to set
+     * @param bevoelkerung der gesetzte Wert
      */
 
     public void setBevoelkerung(Integer bevoelkerung) {
@@ -173,18 +139,18 @@ public class Stadt {
 
 
     /**
-     * gets price
+     * Getter für flaeche
      *
-     * @return value of price
+     * @return flaeche der Stadt
      */
     public BigDecimal getFlaeche() {
         return flaeche;
     }
 
     /**
-     * sets price
+     * Setter für flaeche
      *
-     * @param flaeche the value to set
+     * @param flaeche der gesetzte Wert
      */
 
     public void setFlaeche(BigDecimal flaeche) {

@@ -1,17 +1,11 @@
 package ch.bzz.StadtLand.Model;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.validation.constraints.*;
 import javax.ws.rs.FormParam;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
 /**
- * a country (land) with citys (stadt)
+ * ein Land mit Staedten
  */
 public class Land {
     @FormParam("laendercode")
@@ -24,9 +18,10 @@ public class Land {
     @Size(min=3, max=30)
     private String bezeichnung;
 
-    @JsonIgnore
+    //@JsonIgnore
     // String
-    private List<Stadt> stadtList;
+    @FormParam("stadtList")
+    private List<String> stadtList;
 
     @FormParam("gruendungsJahr")
     @NotNull
@@ -43,58 +38,56 @@ public class Land {
     @Min(1)
     private Double flaeche;
 
-    //* Getter and Setter
-
     /**
-     * gets laenderCode
+     * Getter für laenderCode
      *
-     * @return value of laenderCode
+     * @return den laenderCode
      */
     public String getLaenderCode() {
         return laenderCode;
     }
 
     /**
-     * sets laenderCode
+     * Setter für laenderCode
      *
-     * @param laenderCode the value to set
+     * @param laenderCode Wert der gesetzt wird
      */
     public void setLaenderCode(String laenderCode) {
         this.laenderCode = laenderCode;
     }
 
     /**
-     * gets bezeichnung
+     * Getter für bezeichnung
      *
-     * @return value of bezeichnung
+     * @return die bezeichnung
      */
     public String getBezeichnung() { return bezeichnung; }
 
     /**
-     * sets bezeichnung
+     * Setter für bezeichnung
      *
-     * @param bezeichnung the value to set
+     * @param bezeichnung der gesetzte Wert
      */
     public void setBezeichnung(String bezeichnung) { this.bezeichnung = bezeichnung; }
 
     /**
-     * gets stadtList
+     * Getter für stadtList
      *
-     * @return value of stadtList
+     * @return Wert der stadtList
      */
-    public List<Stadt> getStadtList() { return stadtList; }
+    public List<String> getStadtList() { return stadtList; }
 
     /**
-     * sets stadtList
+     * Setter für stadtList
      *
-     * @param stadtList the value to set
+     * @param stadtList der gesetzte Wert
      */
-    public void setStadtList(List<Stadt> stadtList) { this.stadtList = stadtList; }
+    public void setStadtList(List<String> stadtList) { this.stadtList = stadtList; }
 
     /**
-     * gets gruendungsjahr
+     * Getter für gruendungsjahr
      *
-     * @return value of gruendungsjahr
+     * @return Wert gruendungsjahr
      */
 
     public Integer getGruendungsJahr() {
@@ -102,9 +95,9 @@ public class Land {
     }
 
     /**
-     * sets gruendungsjahr
+     * Setter für gruendungsjahr
      *
-     * @param gruendungsjahr the value to set
+     * @param gruendungsjahr der gesetzte Wert
      */
 
     public void setGruendungsJahr(Integer gruendungsjahr) {
@@ -112,36 +105,36 @@ public class Land {
     }
 
     /**
-     * gets bevoelkerung
+     * Getter für bevoelkerung
      *
-     * @return value of bevoelkerung
+     * @return Wert bevoelkerung
      */
     public Integer getBevoelkerung() {
         return bevoelkerung;
     }
 
     /**
-     * sets bevoelkerung
+     * Setter für bevoelkerung
      *
-     * @param bevoelkerung the value to set
+     * @param bevoelkerung der gesetzte Wert
      */
     public void setBevoelkerung(Integer bevoelkerung) {
         this.bevoelkerung = bevoelkerung;
     }
 
     /**
-     * gets flaeche
+     * Getter für flaeche
      *
-     * @return value of flaeche
+     * @return Wert der flaeche
      */
     public Double getFlaeche() {
         return flaeche;
     }
 
     /**
-     * sets flaeche
+     * Setter für flaeche
      *
-     * @param flaeche the value to set
+     * @param flaeche der gesetzte Wert
      */
     public void setFlaeche(Double flaeche) {
         this.flaeche = flaeche;
