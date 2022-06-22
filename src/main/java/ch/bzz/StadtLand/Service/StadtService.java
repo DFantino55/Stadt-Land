@@ -22,10 +22,20 @@ public class StadtService {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listStaedte() {
-        List<Stadt> stadtList = DataHandler.readAllStaedte();
+    public Response listStaedte(
+            @CookieParam("userRole") String userRole
+    ) {
+        List<Stadt> stadtList = null;
+        int httpStatus;
+        if (userRole == null || userRole.equals("guest")) {
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            stadtList = DataHandler.readAllStaedte();
+        }
+
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity(stadtList)
                 .build();
     }
@@ -39,15 +49,24 @@ public class StadtService {
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readStadt(
+            @CookieParam("userRole") String userRole,
             @NotEmpty
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String stadtUUID
     ) {
+        Stadt stadt = null;
         int httpStatus = 200;
-        Stadt stadt = DataHandler.readStadtByUUID(stadtUUID);
-        if (stadt == null) {
-            httpStatus = 410;
+
+        if (userRole == null || userRole.equals("guest")) {
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            stadt = DataHandler.readStadtByUUID(stadtUUID);
+            if (stadt == null) {
+                httpStatus = 410;
+            }
         }
+
         return Response
                 .status(httpStatus)
                 .entity(stadt)
@@ -63,16 +82,23 @@ public class StadtService {
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
     public Response insertStadt(
+            @CookieParam("userRole") String userRole,
             @Valid @BeanParam Stadt stadt,
             @NotEmpty
             @Pattern(regexp = "[A-Z]{2}-[A-Z]{3}-[0-9]{3}")
             @FormParam("laendercode") String laendercode
     ) {
-        stadt.setLaendercode(laendercode);
+        int httpStatus;
+        if (userRole == null || userRole.equals("guest")) {
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            stadt.setLaendercode(laendercode);
+            DataHandler.insertStadt(stadt);
+            }
 
-        DataHandler.insertStadt(stadt);
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity("")
                 .build();
     }
@@ -86,21 +112,28 @@ public class StadtService {
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateStadt(
+            @CookieParam("userRole") String userRole,
             @Valid @BeanParam Stadt stadt,
             @Pattern(regexp = "[A-Z]{2}-[A-Z]{3}-[0-9]{3}")
             @FormParam("laendercode") String laendercode
     ) {
-        int httpStatus = 200;
-        Stadt oldStadt = DataHandler.readStadtByUUID(stadt.getUuid());
-        if (oldStadt != null) {
-            oldStadt.setBezeichnung(stadt.getBezeichnung());
-            oldStadt.setBevoelkerung(stadt.getBevoelkerung());
-            oldStadt.setFlaeche(stadt.getFlaeche());
-            oldStadt.setLaendercode(laendercode);
-            DataHandler.updateStadt();
+        int httpStatus;
+        if (userRole == null || userRole.equals("guest")) {
+            httpStatus = 403;
         } else {
-            httpStatus = 410;
+            httpStatus = 200;
+            Stadt oldStadt = DataHandler.readStadtByUUID(stadt.getUuid());
+            if (oldStadt != null) {
+                oldStadt.setBezeichnung(stadt.getBezeichnung());
+                oldStadt.setBevoelkerung(stadt.getBevoelkerung());
+                oldStadt.setFlaeche(stadt.getFlaeche());
+                oldStadt.setLaendercode(laendercode);
+                DataHandler.updateStadt();
+            } else {
+                httpStatus = 410;
+            }
         }
+
         return Response
                 .status(httpStatus)
                 .entity("")
@@ -116,12 +149,19 @@ public class StadtService {
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteStadt(
+            @CookieParam("userRole") String userRole,
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String stadtUUID
     ) {
         int httpStatus = 200;
-        if (!DataHandler.deleteStadt(stadtUUID)) {
-            httpStatus = 410;
+        if (userRole == null || userRole.equals("guest")) {
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            if (!DataHandler.deleteStadt(stadtUUID)) {
+                httpStatus = 410;
+            }
+
         }
         return Response
                 .status(httpStatus)

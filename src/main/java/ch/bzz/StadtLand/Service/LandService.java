@@ -22,16 +22,25 @@ public class LandService {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listLaender() {
-        List<Land> landList = DataHandler.readAllLaender();
+    public Response listLaender(
+            @CookieParam("userRole") String userRole
+    ) {
+        List<Land> landList = null;
+        int httpStatus = 200;
+        if (userRole == null || userRole.equals("guest")) {
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            landList = DataHandler.readAllLaender();
+        }
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity(landList)
                 .build();
     }
 
     /**
-     * reads a land by laendercode
+     * liest ein durch laendercode
      * @param laendercode des landes
      * @return land
      */
@@ -39,15 +48,23 @@ public class LandService {
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readLand(
+            @CookieParam("userRole") String userRole,
             @NotEmpty
             @Pattern(regexp = "[A-Z]{2}-[A-Z]{3}-[0-9]{3}")
             @QueryParam("laendercode") String laendercode
     ) {
         int httpStatus = 200;
-        Land land = DataHandler.readLandByLaendercode(laendercode);
-        if (land == null) {
-            httpStatus = 410;
+        Land land = null;
+        if (userRole == null || userRole.equals("guest")) {
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            land = DataHandler.readLandByLaendercode(laendercode);
+            if (land == null) {
+                httpStatus = 410;
+            }
         }
+
         return Response
                 .status(httpStatus)
                 .entity(land)
@@ -63,11 +80,20 @@ public class LandService {
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
     public Response insertLand(
+            @CookieParam("userRole") String userRole,
             @Valid @BeanParam Land land
     ) {
-        DataHandler.insertLand(land);
+
+        int httpStatus = 200;
+        if (userRole == null || userRole.equals("guest")) {
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            DataHandler.insertLand(land);
+        }
+
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity("")
                 .build();
     }
@@ -81,19 +107,27 @@ public class LandService {
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateLand(
+            @CookieParam("userRole") String userRole,
             @Valid @BeanParam Land land
     ) {
         int httpStatus = 200;
-        Land oldLand = DataHandler.readLandByLaendercode(land.getLaenderCode());
-        if (oldLand != null) {
-            oldLand.setBezeichnung(land.getBezeichnung());
-            oldLand.setGruendungsJahr(land.getGruendungsJahr());
-            oldLand.setBevoelkerung(land.getBevoelkerung());
-            oldLand.setFlaeche(land.getFlaeche());
-            DataHandler.updateLand();
+
+        if (userRole == null || userRole.equals("guest")) {
+            httpStatus = 403;
         } else {
-            httpStatus = 410;
+            httpStatus = 200;
+            Land oldLand = DataHandler.readLandByLaendercode(land.getLaenderCode());
+            if (oldLand != null) {
+                oldLand.setBezeichnung(land.getBezeichnung());
+                oldLand.setGruendungsJahr(land.getGruendungsJahr());
+                oldLand.setBevoelkerung(land.getBevoelkerung());
+                oldLand.setFlaeche(land.getFlaeche());
+                DataHandler.updateLand();
+            } else {
+                httpStatus = 410;
+            }
         }
+
         return Response
                 .status(httpStatus)
                 .entity("")
@@ -109,12 +143,18 @@ public class LandService {
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteLand(
+            @CookieParam("userRole") String userRole,
             @Pattern(regexp = "[A-Z]{2}-[A-Z]{3}-[0-9]{3}")
             @QueryParam("laendercode") String laendercode
     ) {
         int httpStatus = 200;
-        if (!DataHandler.deleteLand(laendercode)) {
-            httpStatus = 410;
+        if (userRole == null || userRole.equals("guest")) {
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            if (!DataHandler.deleteLand(laendercode)) {
+                httpStatus = 410;
+            }
         }
         return Response
                 .status(httpStatus)
