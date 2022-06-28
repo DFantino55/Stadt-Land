@@ -6,6 +6,56 @@
 	},
 	"item": [
 		{
+			"name": "6.1 Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "benutzername",
+							"value": "Diego Fantino",
+							"type": "text"
+						},
+						{
+							"key": "passwort",
+							"value": "mornshuel",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/benutzer/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"benutzer",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "0.1 Testservice",
 			"event": [
 				{
@@ -4017,6 +4067,592 @@
 						{
 							"key": "laendercode",
 							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.2 Login failed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "benutzername",
+							"value": "Diego Vantino",
+							"type": "text"
+						},
+						{
+							"key": "passwort",
+							"value": "mornshuel",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/benutzer/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"benutzer",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.3 Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/benutzer/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"benutzer",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.4 list all staedte as guest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.5 list all laender as guest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.6 read stadt by uuid as guest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/read?uuid=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.7 read land by laendercode as guest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/read?laendercode=CH-CHE-756",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"read"
+					],
+					"query": [
+						{
+							"key": "laendercode",
+							"value": "CH-CHE-756"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.8 insert Stadt as guest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaf",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Berlin",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "86000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "27000",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "DE-DEU-276",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.9 insert Land as guest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.10 update Stadt as guest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaab",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Niederhasli",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "160",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"update"
+					],
+					"query": [
+						{
+							"key": "stadtUuid",
+							"value": "ddd",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.11 update Land as guest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250",
+							"type": "text"
+						},
+						{
+							"key": "bezeichnung",
+							"value": "Frankreich",
+							"type": "text"
+						},
+						{
+							"key": "gruendungsJahr",
+							"value": "1792",
+							"type": "text"
+						},
+						{
+							"key": "bevoelkerung",
+							"value": "65000000",
+							"type": "text"
+						},
+						{
+							"key": "flaeche",
+							"value": "551500",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.12 delete Stadt by uuid as guest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/stadt/delete?uuid=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"stadt",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.13 delete Land by laendercode as guest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Stadt-Land-1.0/resource/land/delete?laendercode=FR-FRA-250",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Stadt-Land-1.0",
+						"resource",
+						"land",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "laendercode",
+							"value": "FR-FRA-250"
 						}
 					]
 				}

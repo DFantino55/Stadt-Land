@@ -22,4 +22,10 @@
   "gruendungsJahr" : 1830,
   "bevoelkerung" : 10700000,
   "flaeche" : 131957.0
+}, {
+  "laenderCode" : "FR-FRA-250",
+  "bezeichnung" : "Frankreich",
+  "gruendungsJahr" : 1792,
+  "bevoelkerung" : 65000000,
+  "flaeche" : 551500.0
 } ]

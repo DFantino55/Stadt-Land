@@ -1,0 +1,14 @@
+[
+    {
+        "uuid": "3247c340-c712-402e-b400-0a23a9368c97",
+        "benutzername": "Diego Fantino",
+        "passwort": "mornshuel",
+        "rolle": "admin"
+    },
+    {
+        "uuid": "4359d367-c712-402e-b400-0a23a9368c97",
+        "benutzername": "Ertan Dogan",
+        "passwort": "dvf",
+        "rolle": "user"
+    }
+]
