@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Anmeldung</title>
+    <link rel="stylesheet" href="./css/css.css">
 </head>
 <body>
-
+<nav id="nav">
+    <span><a href="./städte.html">Städte</a></span>
+    <span><a href="./länder.html">Länder</a></span>
+    <span id="logOnOff"><a href="./index.html">Abmelden</a></a></span>
+</nav>
+<form id="loginForm" name="login">
+    <h3>Anmelden</h3>
+    <div id="message" style="color: red;"></div>
+    <table>
+        <tr>
+            <td>Benutzername</td>
+            <td><input id="benutzername" name="benutzername" type="text" size="38" minlength="2" maxlength="41" required></td>
+        </tr>
+        <tr>
+            <td>Passwort</td>
+            <td><input id="passwort" name="passwort" type="text" size="38" minlength="5" maxlength="31" required></td>
+        </tr>
+        <tr>
+            <td>
+                <button id="login" type="submit">Anmelden</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="./js/login.js"></script>
 </body>
 </html>

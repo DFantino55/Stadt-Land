@@ -7,44 +7,84 @@ public class Benutzer {
     private String uuid;
     private String benutzername;
     private String passwort;
-    private String role;
+    private String rolle;
 
     /**
      * Konstruktor
      */
     public Benutzer() {
-        setRole("guest");
+        setRolle("guest");
     }
 
+    /**
+     * Getter für uuid
+     *
+     * @return wert der uuid
+     */
     public String getUuid() {
         return uuid;
     }
 
+    /**
+     * Setter für uuid
+     *
+     * @param uuid die gesetzt wird
+     */
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
+    /**
+     * Getter für Benutzername
+     *
+     * @return den Benutzernamen
+     */
     public String getBenutzername() {
         return benutzername;
     }
 
+    /**
+     * Setter für Benutzername
+     *
+     * @param benutzername der gesetzt wird
+     */
     public void setBenutzername(String benutzername) {
         this.benutzername = benutzername;
     }
 
+    /**
+     * Getter für passwort
+     *
+     * @return das passwort
+     */
     public String getPasswort() {
         return passwort;
     }
 
+    /**
+     * Setter für passwort
+     *
+     * @param passwort das gesetzt wird
+     */
     public void setPasswort(String passwort) {
         this.passwort = passwort;
     }
 
-    public String getRole() {
-        return role;
+    /**
+     * Getter für Rolle
+     *
+     * @return die Rolle
+     */
+    public String getRolle() {
+        return rolle;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    /**
+     * Setter für Rolle
+     *
+     * @param rolle die gesetzt wird
+     */
+    public void setRolle(String rolle) {
+        this.rolle = rolle;
     }
 }

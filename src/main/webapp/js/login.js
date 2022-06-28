@@ -26,7 +26,7 @@ function sendLogin(form) {
             data: $("#loginForm").serialize()
         })
         .done(function () {
-            window.location.href = "./stadtland.html";
+            window.location.href = "./städte.html";
         })
         .fail(function (xhr, status, errorThrown) {
             if (xhr.status == 404) {
@@ -35,7 +35,7 @@ function sendLogin(form) {
                 $("#message").text("Es ist ein Fehler aufgetreten");
             }
         })
-}
+$}
 
 
 

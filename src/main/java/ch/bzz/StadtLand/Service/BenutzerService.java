@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 public class BenutzerService {
 
     /**
-     *loggt einen Benutzer mit Benutzernamen und Passwort ein
+     * loggt einen Benutzer mit Benutzernamen und Passwort ein
      *
      * @param benutzername des benutzers
      * @param passwort des benutzers
@@ -30,14 +30,14 @@ public class BenutzerService {
     {
         int httpStatus;
         Benutzer benutzer = UserData.findUser(benutzername,passwort);
-        if (benutzer == null || benutzer.getRole() == null || benutzer.getRole().equals("guest")) {
+        if (benutzer == null || benutzer.getRolle() == null || benutzer.getRolle().equals("guest")) {
             httpStatus = 404;
         } else {
             httpStatus = 200;
         }
         NewCookie cookie = new NewCookie(
                 "userRole",
-                benutzer.getRole(),
+                benutzer.getRolle(),
                 "/",
                 "",
                 "Login-Cookie",

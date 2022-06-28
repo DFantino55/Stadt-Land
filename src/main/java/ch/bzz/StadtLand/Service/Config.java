@@ -9,19 +9,17 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * configure the web services and properties
+ * konfiguriert web services und properties
  */
-
 @ApplicationPath("/resource")
-
 public class Config extends Application {
     private static final String PROPERTIES_PATH = "/home/bzz/webapp/stadtlist.properties";
     private static Properties properties = null;
 
     /**
-     * define all provider classes
+     * definiert alle provider Klassen
      *
-     * @return set of classes
+     * @return set mit Klassen
      */
     @Override
     public Set<Class<?>> getClasses() {
@@ -34,10 +32,10 @@ public class Config extends Application {
     }
 
     /**
-     * Gets the value of a property
+     * Getter für Property
      *
-     * @param property the key of the property to be read
-     * @return the value of the property
+     * @param property welche gelesen wird
+     * @return wert der property
      */
     public static String getProperty(String property) {
         if (Config.properties == null) {
@@ -50,7 +48,7 @@ public class Config extends Application {
     }
 
     /**
-     * reads the properties file
+     * liest property files
      */
     private static void readProperties() {
 
@@ -66,9 +64,9 @@ public class Config extends Application {
     }
 
     /**
-     * Sets the properties
+     * Setter für Properties
      *
-     * @param properties the value to set
+     * @param properties zu setzende Properties
      */
     private static void setProperties(Properties properties) {
         Config.properties = properties;

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Bücherliste</title>
+    <script src="./js/stadt.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/css.css">
+</head>
+<body>
+<nav id="nav">
+    <span><a href="./städte.html">Städte</a></span>
+    <span><a href="./länder.html">Länder</a></span>
+    <span id="logOnOff"><a href="./index.html">Abmelden</a></a></span>
+</nav>
+<h3>StadtList</h3>
+<form id="shelfForm">
+    <table id="stadtList">
+        <thead>
+        <tr>
+            <th>uuid</th>
+            <th>bezeichnung</th>
+            <th>bevoelkerung</th>
+            <th>flaeche</th>
+            <th>land</th>
+        </tr>
+        </thead>
+        <tbody id="stadt">
+
+        </tbody>
+    </table>
+    <p>
+        <a href="./bookedit.html">Neues Buch</a>
+    </p>
+</form>
+</body>
+</html>

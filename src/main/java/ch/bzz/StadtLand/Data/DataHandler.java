@@ -228,7 +228,6 @@ public final class DataHandler {
      *
      * @return stadlist liste der städte
      */
-
     private static List<Stadt> getStadtList() {
 
         if (stadtList == null) {
@@ -243,7 +242,6 @@ public final class DataHandler {
      *
      * @param stadtList die gesetzt wird
      */
-
     private static void setStadtList(List<Stadt> stadtList) {
         DataHandler.stadtList = stadtList;
     }
@@ -253,7 +251,6 @@ public final class DataHandler {
      *
      * @return landListe liste der länder
      */
-
     private static List<Land> getLandList() {
         if (landList == null) {
             setLandList(new ArrayList<>());
@@ -268,7 +265,6 @@ public final class DataHandler {
      *
      * @param landList liste der länder
      */
-
     private static void setLandList(List<Land> landList) {
         DataHandler.landList = landList;
     }

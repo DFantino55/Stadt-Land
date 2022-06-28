@@ -12,8 +12,8 @@ import javax.ws.rs.core.Response;
 public class TestService {
 
     /**
-     * confirms the application runs
-     * @return  message
+     * testet ob Applikation funktioniert
+     * @return  mitteilung
      */
     @GET
     @Path("test")

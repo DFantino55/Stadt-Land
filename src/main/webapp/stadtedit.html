@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Stadt bearbeiten</title>
+    <link rel="stylesheet" href="./css/css.css">
+    <script src="./js/util.js"></script>
+    <script src="./js/stadtedit.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<nav id="nav">
+    <span><a href="./städte.html">Städte</a></span>
+    <span><a href="./länder.html">Länder</a></span>
+    <span id="logOnOff"><a href="./index.html">Abmelden</a></a></span>
+    <span id="message" style="color: #ff0000;"></span>
+</nav>
+<h3>Stadt bearbeiten</h3>
+<form id="bookeditForm" name="bookedit">
+    <table>
+        <tr>
+            <td><label for="uuid">uuid</label></td>
+            <td>
+                <input id="uuid" name="uuid" type="pattern"
+                       pattern="(?= |[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="bezeichnung">bezeichnung</label></td>
+            <td>
+                <input id="bezeichnung" name="bezeichnung" type="text" size="30" minlength="3" maxlength="30" required/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="land">Land</label></td>
+            <td>
+                <select id="land" name="land" required>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <button id="save" type="submit">Speichern</button>
+            </td>
+            <td>
+                <button id="reset" type="reset">Zurücksetzen</button>
+            </td>
+            <td>
+                <button id="cancel" type="button">Abbruch</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
