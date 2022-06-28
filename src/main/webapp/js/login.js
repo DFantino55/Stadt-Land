@@ -37,8 +37,6 @@ function sendLogin(form) {
         })
 $}
 
-
-
 /**
  * sendet logoff anfrage
  */

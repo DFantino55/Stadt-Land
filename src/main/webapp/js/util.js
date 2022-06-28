@@ -1,16 +1,16 @@
 /**
- * utility functions for multiple pages
+ * util Funktionen für mehrere Seiten
  *
  * @author  Diego F.
- * @since   2022-05-30
+ * @since   2022-06-28
  * @version 1.0
  */
 
 /**
- * get the value of an url parameter identified by key
- * source: https://www.sitepoint.com/get-url-parameters-with-javascript/
- * @param key  the key to be searched
- * @returns values as a String or null
+ * Getter für wert eines url parameters identifiziert durch schlüssel
+ * quelle: https://www.sitepoint.com/get-url-parameters-with-javascript/
+ * @param key schlüssel mit dem gesucht wird
+ * @returns wert als String oder null
  */
 function getQueryParam (key) {
     const queryString = window.location.search;
@@ -20,9 +20,9 @@ function getQueryParam (key) {
 }
 
 /**
- * gets the value of the cookie with the specified name
- * Source: https://www.w3schools.com/js/js_cookies.asp
- * @param cname  the name of the cookie
+ * Getter für den Wert des Cookies mit bestimmten Namen
+ * quelle: https://www.w3schools.com/js/js_cookies.asp
+ * @param cname name des cookies
  * @returns {string}
  */
 function getCookie(cname) {

@@ -1,3 +1,11 @@
+/**
+ * editiert Städte
+ *
+ * @author  Diego F.
+ * @since   2022-06-28
+ * @version 1.0
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
     readLaender();
     readStadt();
@@ -7,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * saves the data of a book
+ * speichert Daten einer Stadt
  */
 function saveStadt(event) {
     event.preventDefault();
@@ -44,10 +52,11 @@ function saveStadt(event) {
         .catch(function (error) {
             console.log(error);
         });
+    window.location.href = "städte.html";
 }
 
 /**
- * reads a book
+ * liest eine Stadt
  */
 function readStadt() {
     const uuid = getQueryParam("uuid");
@@ -69,8 +78,8 @@ function readStadt() {
 }
 
 /**
- * show the data of a book
- * @param data  the book-data
+ * zeigt die Daten einer stadt
+ * @param data daten der Stadt
  */
 function showStadt(data) {
     document.getElementById("uuid").value = data.uuid;
@@ -88,7 +97,7 @@ function showStadt(data) {
 }
 
 /**
- * reads all publishers as an array
+ * liest alle länder als array
  */
 function readLaender() {
 
@@ -110,7 +119,7 @@ function readLaender() {
 }
 
 /**
- * shows all publishers as a dropdown
+ * zeigt alle länder als dropdown
  * @param data
  */
 function showLaender(data) {
@@ -124,8 +133,8 @@ function showLaender(data) {
 }
 
 /**
- * redirects to the bookshelf
- * @param event  the click-event
+ * verlinkt zu städte.html
+ * @param event clickevent
  */
 function cancelEdit(event) {
     window.location.href = "städte.html";

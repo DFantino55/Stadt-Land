@@ -1,9 +1,17 @@
+/**
+ * stadt Viev-Controller
+ *
+ * @author  Diego F.
+ * @since   2022-06-28
+ * @version 1.0
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
     readStaedte();
 });
 
 /**
- * reads all books
+ * liest alle städte
  */
 function readStaedte() {
     fetch("./resource/stadt/list")
@@ -24,8 +32,8 @@ function readStaedte() {
 }
 
 /**
- * shows the booklist as a table
- * @param data  the books
+ * zeigt stadlist als tabelle
+ * @param data die städte
  */
 function showStadtList(data) {
     let tBody = document.getElementById("stadt");
@@ -57,8 +65,8 @@ function showStadtList(data) {
 }
 
 /**
- * redirects to the edit-form
- * @param event  the click-event
+ * verlinkt zu edit-form
+ * @param event click-event
  */
 function editStadt(event) {
     const button = event.target;
@@ -67,8 +75,8 @@ function editStadt(event) {
 }
 
 /**
- * deletes a book
- * @param event  the click-event
+ * löscht eine stadt
+ * @param event clickevent
  */
 function deleteStadt(event) {
     const button = event.target;
