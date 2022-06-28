@@ -72,15 +72,15 @@ function editStadt(event) {
  */
 function deleteStadt(event) {
     const button = event.target;
-    const bookUUID = button.getAttribute("data-bookuuid");
+    const uuid = button.getAttribute("data-stadtuuid");
 
-    fetch("./resource/book/delete?uuid=" + bookUUID,
+    fetch("./resource/stadt/delete?uuid=" + uuid,
         {
             method: "DELETE"
         })
         .then(function (response) {
             if (response.ok) {
-                window.location.href = "./bookshelf.html";
+                window.location.href = "./städte.html";
             } else {
                 console.log(response);
             }

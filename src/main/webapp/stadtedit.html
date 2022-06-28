@@ -21,7 +21,7 @@
         <tr>
             <td><label for="uuid">uuid</label></td>
             <td>
-                <input id="uuid" name="uuid" type="pattern"
+                <input id="uuid" name="uuid" size="30" type="pattern"
                        pattern="(?= |[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}"/>
             </td>
         </tr>
@@ -36,6 +36,18 @@
             <td>
                 <select id="land" name="land" required>
                 </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="bevoelkerung">bevoelkerung</label></td>
+            <td>
+                <input id="bevoelkerung" name="bevoelkerung" type="number" min="1" size="30" required/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="flaeche">flaeche</label></td>
+            <td>
+                <input id="flaeche" name="flaeche" type="number" min="1" size="30" required/>
             </td>
         </tr>
     </table>

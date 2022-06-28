@@ -13,7 +13,7 @@ function saveStadt(event) {
     event.preventDefault();
 
     const bookForm = document.getElementById("bookeditForm");
-    const formData = new FormData(stadtForm);
+    const formData = new FormData(bookForm);
     const data = new URLSearchParams(formData);
 
     let method;
@@ -75,6 +75,16 @@ function readStadt() {
 function showStadt(data) {
     document.getElementById("uuid").value = data.uuid;
     document.getElementById("bezeichnung").value = data.bezeichnung;
+    document.getElementById("bevoelkerung").value = data.bevoelkerung;
+    document.getElementById("flaeche").value = data.flaeche;
+
+    var select = document.getElementById("land");
+    for(var i = 0; i < select.options.length;i++) {
+        if(select.options[i].text == data.land.bezeichnung) {
+            select.options[i].selected = true;
+        }
+    }
+
 }
 
 /**
